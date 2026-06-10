@@ -1,0 +1,56 @@
+TASK-2 (Train a Linear Regression Model)
+
+PYTHON CODE:
+
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+# Student Scores Dataset
+data = {
+'Hours': [2.5, 5.1, 3.2, 8.5, 3.5, 1.5, 9.2, 5.5, 8.3, 2.7,
+7.7, 5.9, 4.5, 3.3, 1.1, 8.9, 2.5, 1.9, 6.1, 7.4,
+2.7, 4.8, 3.8, 6.9, 7.8],
+'Score': [21, 47, 27, 75, 30, 20, 88, 60, 81, 25,
+85, 62, 41, 42, 17, 95, 30, 24, 67, 69,
+30, 54, 35, 76, 86]
+}
+
+df = pd.DataFrame(data)
+
+# Features and target
+X = df[['Hours']]
+y = df['Score']
+
+# Split data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(
+X, y, test_size=0.2, random_state=42
+)
+
+# Train Linear Regression model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Display coefficient and intercept
+print("Slope (Coefficient):", round(model.coef_[0], 2))
+print("Intercept:", round(model.intercept_, 2))
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+print("\nPredicted Scores:")
+for actual, predicted in zip(y_test, y_pred):
+print(f"Actual: {actual}, Predicted: {predicted:.2f}")
+
+OUTPUT:
+Slope (Coefficient): 9.68
+Intercept: 2.83
+
+Predicted Scores:
+Actual: 81, Predicted: 83.19
+Actual: 30, Predicted: 27.03
+Actual: 21, Predicted: 27.03
+Actual: 76, Predicted: 69.63
+Actual: 62, Predicted: 59.95
+
